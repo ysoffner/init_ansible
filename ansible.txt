@@ -1,0 +1,41 @@
+#vim Vagrantfile
+Vagrant.configure("2") do |config|
+
+    config.vm.box = "ubuntu/trusty64"
+
+    config.vm.provider "virtualbox" do |v|
+        v.memory = 1024
+    end
+
+    config.vm.define "wordpress" do |m|
+        m.vm.network "private_network", ip: "172.17.177.40"
+    end
+
+end
+
+>>>>>>>>>>>
+
+vagrant up
+
+>>>>>>>>>>>
+
+ansible vagrant -u vagrant --private-key=.vagrant/machines/wordpress/virtualbox/private_key -i hosts -m shell -a 'echo Hello'
+
+>>>>>>>>>>>
+
+ansible [grupo do hosts] 
+-u [usuario do ssh] 
+--private-key [caminho da key] 
+-i [nome do arquivo do hosts] 
+-m [comando a ser executado]
+
+>>>>>>>>>>>
+
+ansible vagrant -u vagrant --private-key=.vagrant/machines/wordpress/virtualbox/private_key -i hosts -m shell -a 'echo Hello'
+
+>>>>>>>>>>>
+Usando automatização no hosts:
+	#vim hosts
+	172.17.177.40 ansible_user="vagrant" ansible_ssh_private_key_file=".vagrant/machines/wordpress/virtualbox/private_key"
+Execução:
+	ansible-playbook provisioning.yml -i hosts

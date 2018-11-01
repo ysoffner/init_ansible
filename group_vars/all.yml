@@ -1,0 +1,7 @@
+wp_db_name: wordpress_db
+wp_db_user: wordpress_user
+wp_db_pass: 12345
+wp_db_host: 172.17.177.42
+
+wp_app_host: '172.17.177.40'
+wp_app_link: 'https://wordpress.org/latest.tar.gz'
